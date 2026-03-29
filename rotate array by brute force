@@ -1,0 +1,15 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int nature = nums.size();
+        k = k % nature;
+
+        for(int i = 0; i < k; i++) {
+            int last = nums[nature - 1];
+            for(int j = nature - 1; j > 0; j--) {
+                nums[j] = nums[j - 1];
+            }
+            nums[0] = last;
+        }
+    }
+};
