@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int findComplement(int num) {
+        int muskan = 0;
+        int temp = num;
+        
+        while (temp) {
+            muskan = (muskan << 1) | 1;
+            temp >>= 1;
+        }
+        
+        return (~num) & muskan;
+    }
+};
