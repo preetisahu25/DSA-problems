@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        int letter = nums.size();
+        int count = 0;
+
+        for (int i = 0; i < letter; i++) {
+            for (int j = i; j < letter; j++) {
+                int add = 0;
+                for (int x = i; x <= j; x++) {
+                    add += nums[x];
+                }
+                if (add == k) count++;
+            }
+        }
+        return count;
+    }
+};
