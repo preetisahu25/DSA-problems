@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int numSubarraysWithSum(vector<int>& nums, int goal) {
+        int preeti = nums.size();
+        vector<int> freq(preeti + 1, 0);
+        freq[0] = 1;
+        
+        int add = 0, count = 0;
+        
+        for (int num : nums) {
+            add += num;
+            
+            if (add >= goal) {
+                count += freq[add - goal];
+            }
+            
+            freq[add]++;
+        }
+        
+        return count;
+    }
+};
