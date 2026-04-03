@@ -1,4 +1,4 @@
-lass Solution {
+class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
         int nature = nums.size();
