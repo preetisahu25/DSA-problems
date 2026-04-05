@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        vector<string> arr;
+
+        for (int number : nums)
+            arr.push_back(to_string(number));
+
+        int n = arr.size();
+
+        for (int m = 0; m < n - 1; m++) {
+            for (int k = 0; k < n - m - 1; k++) {
+                if (arr[k] + arr[k+1] < arr[k+1] + arr[k]) {
+                    swap(arr[k], arr[k+1]);
+                }
+            }
+        }
+
+        if (arr[0] == "0") return "0";
+
+        string result;
+        for (auto &s : arr) result += s;
+
+        return result;
+    }
+};
