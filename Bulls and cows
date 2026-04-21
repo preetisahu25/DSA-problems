@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string getHint(string secret, string guess) {
+        int bulls = 0;
+        int cows = 0;
+        vector<int> sFreq(10, 0); // Freq of digits in secret
+        vector<int> gFreq(10, 0); // Freq of digits in guess
+
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret[i] == guess[i]) {
+                bulls++;
+            } else {
+                // Count non-bulls only
+                sFreq[secret[i] - '0']++;
+                gFreq[guess[i] - '0']++;
+            }
+        }
+
+        // Cows are minimum of non-bull frequency
+        for (int i = 0; i < 10; i++) {
+            cows += min(sFreq[i], gFreq[i]);
+        }
+
+        return to_string(bulls) + "A" + to_string(cows) + "B";
+    }
+};
