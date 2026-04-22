@@ -1,0 +1,50 @@
+class Solution {
+public:
+    string longestDupSubstring(string s) {
+        int nature = s.size();
+        int left = 1, right = nature - 1;
+        string solution = "";
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            string dup = search(s, mid);
+
+            if (dup != "") {
+                solution = dup;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return solution;
+    }
+
+    string search(string &s, int len) {
+        long long mod = 1e9 + 7;
+        long long base = 256;
+        int n = s.size();
+
+        long long hash = 0, power = 1;
+
+        for (int i = 0; i < len; i++) {
+            hash = (hash * base + s[i]) % mod;
+            power = (power * base) % mod;
+        }
+
+        unordered_set<long long> seen;
+        seen.insert(hash);
+
+        for (int i = len; i < n; i++) {
+            hash = (hash * base - s[i - len] * power % mod + mod) % mod;
+            hash = (hash + s[i]) % mod;
+
+            if (seen.count(hash)) {
+                return s.substr(i - len + 1, len);
+            }
+
+            seen.insert(hash);
+        }
+
+        return "";
+    }
+};
