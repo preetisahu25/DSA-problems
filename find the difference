@@ -1,0 +1,19 @@
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        vector<int> freq(35, 0);
+        
+        for(char chor : s) {
+            freq[chor - 'a']++;
+        }
+        
+        for(char chor : t) {
+            freq[chor - 'a']--;
+            if(freq[chor - 'a'] < 0) {
+                return chor;
+            }
+        }
+        
+        return ' ';
+    }
+};  
